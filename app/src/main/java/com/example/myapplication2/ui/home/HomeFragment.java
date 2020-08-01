@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment implements HomeRecyclerViewAdapter.It
         @Override
         protected JSONArray doInBackground(String... params) {
             try {
-                JSONArray json = new JSONArray(IOUtils.toString(new URL("http://10.0.2.2:8080/home/education/news"), Charset.forName("UTF-8")));
+                JSONArray json = new JSONArray(IOUtils.toString(new URL("http://192.168.31.212:8080/home/education/news"), Charset.forName("UTF-8")));
                 return json;
 
             } catch (Exception ex) {
@@ -150,22 +150,22 @@ public class HomeFragment extends Fragment implements HomeRecyclerViewAdapter.It
                     JSONObject jsonObject = result.getJSONObject(i);
                     NewsEnt newsEnt = new NewsEnt(
                             jsonObject.getString("id"),
-                            jsonObject.getString("last_update"),
+                            jsonObject.getInt("orderid"),
                             jsonObject.getString("modification_date"),
-                            jsonObject.getInt("sequence"),
+                            jsonObject.getString("time_stamp"),
                             jsonObject.getInt("owner_site"),
-                            jsonObject.getString("created_date"),
-                            jsonObject.getString("description"),
+                            jsonObject.getString("descr"),
                             jsonObject.getString("lang"),
                             jsonObject.getString("link"),
                             jsonObject.getString("image_link"),
-                            jsonObject.getString("category")
+                            jsonObject.getString("category"),
+                            jsonObject.getString("oper_time")
                     );
 
 
                     Realm realm = Realm.getDefaultInstance();
                     RealmResults<NewsEnt> realmResults = realm.where(NewsEnt.class)
-                            .equalTo("sequence", newsEnt.getSequence()).findAll();
+                            .equalTo("orderid", newsEnt.getOrderid()).findAll();
                     if(realmResults.isEmpty()) {
                         realm.beginTransaction();
                         realm.copyToRealm(newsEnt);
@@ -192,22 +192,22 @@ public class HomeFragment extends Fragment implements HomeRecyclerViewAdapter.It
 
     public String getOldSequenceByCategory(String category){
         Realm realm = Realm.getDefaultInstance();
-        RealmResults<NewsEnt> realmResults = realm.where(NewsEnt.class).equalTo("category", category).sort("sequence", Sort.ASCENDING).findAll();
+        RealmResults<NewsEnt> realmResults = realm.where(NewsEnt.class).equalTo("category", category).sort("orderid", Sort.ASCENDING).findAll();
         if(realmResults.isEmpty()){
             return null;
         }else{
-            return String.valueOf(realmResults.get(0).getSequence());
+            return String.valueOf(realmResults.get(0).getOrderid());
         }
 
     }
 
     public String getNewSequenceByCategory(String category){
         Realm realm = Realm.getDefaultInstance();
-        RealmResults<NewsEnt> realmResults = realm.where(NewsEnt.class).equalTo("category", category).sort("sequence", Sort.DESCENDING).findAll();
+        RealmResults<NewsEnt> realmResults = realm.where(NewsEnt.class).equalTo("category", category).sort("orderid", Sort.DESCENDING).findAll();
         if(realmResults.isEmpty()){
             return null;
         }else{
-            return String.valueOf(realmResults.get(0).getSequence());
+            return String.valueOf(realmResults.get(0).getOrderid());
         }
 
     }
@@ -234,9 +234,9 @@ public class HomeFragment extends Fragment implements HomeRecyclerViewAdapter.It
                 for (CategoryEnt categoryEnt : realmResults){
                     String oldSequence = getOldSequenceByCategory(String.valueOf(categoryEnt.getNumber()));
                     if(oldSequence == null){
-                        jsonList.add(new JSONArray(IOUtils.toString(new URL("http://10.0.2.2:8080/home/education/newscategory/" + categoryEnt.getNumber()), Charset.forName("UTF-8"))));
+                        jsonList.add(new JSONArray(IOUtils.toString(new URL("http://192.168.31.212:8080/home/education/newscategory/" + categoryEnt.getNumber()), Charset.forName("UTF-8"))));
                     }else{
-                        jsonList.add(new JSONArray(IOUtils.toString(new URL("http://10.0.2.2:8080/home/education/oldnews/" + oldSequence), Charset.forName("UTF-8"))));
+                        jsonList.add(new JSONArray(IOUtils.toString(new URL("http://192.168.31.212:8080/home/education/oldnews/" + oldSequence), Charset.forName("UTF-8"))));
                     }
 
                 }
@@ -261,22 +261,22 @@ public class HomeFragment extends Fragment implements HomeRecyclerViewAdapter.It
                         JSONObject jsonObject = result.getJSONObject(i);
                         NewsEnt newsEnt = new NewsEnt(
                                 jsonObject.getString("id"),
-                                jsonObject.getString("last_update"),
+                                jsonObject.getInt("orderid"),
                                 jsonObject.getString("modification_date"),
-                                jsonObject.getInt("sequence"),
+                                jsonObject.getString("time_stamp"),
                                 jsonObject.getInt("owner_site"),
-                                jsonObject.getString("created_date"),
-                                jsonObject.getString("description"),
+                                jsonObject.getString("descr"),
                                 jsonObject.getString("lang"),
                                 jsonObject.getString("link"),
                                 jsonObject.getString("image_link"),
-                                jsonObject.getString("category")
+                                jsonObject.getString("category"),
+                                jsonObject.getString("oper_time")
                         );
 
 
                         Realm realm = Realm.getDefaultInstance();
                         RealmResults<NewsEnt> realmResults = realm.where(NewsEnt.class)
-                                .equalTo("sequence", newsEnt.getSequence()).findAll();
+                                .equalTo("orderid", newsEnt.getOrderid()).findAll();
                         if (realmResults.isEmpty()) {
                             realm.beginTransaction();
                             realm.copyToRealm(newsEnt);

@@ -6,52 +6,16 @@ import io.realm.RealmObject;
 
 public class NewsEnt extends RealmObject {
     private String id;
-    private String last_update;
+    private int orderid;
     private String modification_date;
-    private int sequence;
+    private String time_stamp;
     private int owner_site;
-    private String created_date;
-    private String description;
+    private String descr;
     private String lang;
     private String link;
     private String image_link;
     private String category;
-
-    public NewsEnt(String id, String last_update, String modification_date, int sequence, int owner_site, String created_date, String description, String lang, String link, String image_link, String category) {
-        this.id = id;
-        this.last_update = last_update;
-        this.modification_date = modification_date;
-        this.sequence = sequence;
-        this.owner_site = owner_site;
-        this.created_date = created_date;
-        this.description = description;
-        this.lang = lang;
-        this.link = link;
-        this.image_link = image_link;
-        this.category = category;
-    }
-
-    public NewsEnt(){
-
-    }
-
-    public String getCategory() {
-        return category;
-    }
-
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getImage_link() {
-        return image_link;
-    }
-
-    public void setImage_link(String image_link) {
-        this.image_link = image_link;
-    }
-
-    //java.text.SimpleDateFormat sdf =  new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    private String oper_time;
 
     public String getId() {
         return id;
@@ -59,22 +23,6 @@ public class NewsEnt extends RealmObject {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getLast_update() {
-        return last_update;
-    }
-
-    public void setLast_update(String last_update) {
-        this.last_update = last_update;
-    }
-
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
     }
 
     public String getModification_date() {
@@ -85,6 +33,14 @@ public class NewsEnt extends RealmObject {
         this.modification_date = modification_date;
     }
 
+    public String getTime_stamp() {
+        return time_stamp;
+    }
+
+    public void setTime_stamp(String time_stamp) {
+        this.time_stamp = time_stamp;
+    }
+
     public int getOwner_site() {
         return owner_site;
     }
@@ -93,20 +49,12 @@ public class NewsEnt extends RealmObject {
         this.owner_site = owner_site;
     }
 
-    public String getCreated_date() {
-        return created_date;
+    public String getDescr() {
+        return descr;
     }
 
-    public void setCreated_date(String created_date) {
-        this.created_date = created_date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescr(String descr) {
+        this.descr = descr;
     }
 
     public String getLang() {
@@ -117,11 +65,61 @@ public class NewsEnt extends RealmObject {
         this.lang = lang;
     }
 
-    public int getSequence() {
-        return sequence;
+    public String getLink() {
+        return link;
     }
 
-    public void setSequence(int sequence) {
-        this.sequence = sequence;
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getImage_link() {
+        return image_link;
+    }
+
+    public void setImage_link(String image_link) {
+        this.image_link = image_link;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getOper_time() {
+        return oper_time;
+    }
+
+    public void setOper_time(String oper_time) {
+        this.oper_time = oper_time;
+    }
+
+    public int getOrderid() {
+        return orderid;
+    }
+
+    public void setOrderid(int orderid) {
+        this.orderid = orderid;
+    }
+
+    public NewsEnt(String id, int orderid, String modification_date, String time_stamp, int owner_site, String descr, String lang, String link, String image_link, String category, String oper_time) {
+        this.id = id;
+        this.orderid = orderid;
+        this.modification_date = modification_date;
+        this.time_stamp = time_stamp;
+        this.owner_site = owner_site;
+        this.descr = descr;
+        this.lang = lang;
+        this.link = link;
+        this.image_link = image_link;
+        this.category = category;
+        this.oper_time = oper_time;
+    }
+
+    public NewsEnt() {
+
     }
 }

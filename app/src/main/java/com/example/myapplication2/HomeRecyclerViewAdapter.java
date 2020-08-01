@@ -75,7 +75,7 @@ public class HomeRecyclerViewAdapter extends RecyclerView.Adapter<HomeRecyclerVi
 
 
 
-        holder.textViewDescr.setText(getItem(position).getDescription());
+        holder.textViewDescr.setText(getItem(position).getDescr());
         holder.textViewCategory.setText(getCategoryName(getItem(position).getCategory(), context));
         holder.textViewCategory.setBackground(getCategoryBackground(getItem(position).getCategory(), context));
         holder.textViewCategory.setPadding(5, 5, 5, 5);

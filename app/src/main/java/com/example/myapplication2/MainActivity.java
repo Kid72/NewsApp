@@ -25,7 +25,7 @@ import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
 
-    String url = "http://10.0.2.2:8080/home/education/news";
+    String url = "http://192.168.31.212:8080/home/education/news";
     ProgressDialog progressDialog;
     ListView list_of_calendar;
     ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         Fresco.initialize(this);
         Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm3").build();
+        RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm4").build();
         Realm.setDefaultConfiguration(config);
 
         Realm realm = Realm.getDefaultInstance();
